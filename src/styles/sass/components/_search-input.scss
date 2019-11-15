@@ -1,0 +1,16 @@
+.search-input {
+    @extend .bg-transparent;
+    width: 100%;
+    padding-left: 30px;
+    height: 30px;
+    color: #fff;
+
+    &::placeholder {
+        @extend .text-primary-bright-light;
+    }
+}
+
+.search-icon {
+    padding: 8px 0px 0px 10px;
+    @extend .text-gray-100;
+}
