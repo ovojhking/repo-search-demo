@@ -61,7 +61,6 @@ class InfiniteScroll extends Component {
 		const { updateResourceList, renderItem } = this.props;
 
 		if (resourceList.length <= this.lengthOfaddList * 2) {
-			console.log('time to update!');
 			updateResourceList();
 		}
 
