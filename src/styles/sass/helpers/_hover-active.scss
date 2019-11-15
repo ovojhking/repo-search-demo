@@ -1,0 +1,63 @@
+.hover-active-block{
+  @each $color,$value in $theme-colors{
+      &-#{$color}{
+          background-color: $value;
+          color: $white;
+
+          &:hover{
+              background-color: rgba($value, .75);
+          }
+
+
+      }
+
+      &-#{$color}-inverse{
+        background-color: $white;
+        color: $black;
+
+        &:hover{
+          background-color: rgba($value, .75);
+        }
+
+        &:active,&.active{
+          background-color: $value;
+          color: $white;
+        }
+      }
+  }
+}
+
+
+.hover-active-ellipse {
+
+  &:hover,&:active,&.active{
+    border-radius: 50px;
+    //box-shadow: 3px 3px 0 0 rgba(36,36,36,0.15);
+  }
+
+  @each $color,$value in $theme-colors{
+    &-#{$color}{
+
+      background-color: $value;
+      color: $white;
+
+      &:hover{
+        background-color: rgba($value, .75);
+      }
+
+
+    }
+
+    &-#{$color}-inverse{
+      color: $black;
+      &:hover{
+        background-color: rgba($value, .75);
+      }
+
+      &:active,&.active{
+        background-color: $value;
+        color: $white;
+      }
+    }
+  }
+}

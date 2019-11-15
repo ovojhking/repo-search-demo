@@ -1,0 +1,8 @@
+
+@each $radius,$size  in $radius-collection{
+  .border-radius-#{$radius}{  border-radius: #{$size};  }
+  .border-radius-bl-#{$radius}    {  border-bottom-left-radius: #{$size};}
+  .border-radius-br-#{$radius}    {  border-bottom-right-radius: #{$size};}
+  .border-radius-tl-#{$radius}    {  border-top-left-radius: #{$size};}
+  .border-radius-tr-#{$radius}    {  border-top-right-radius: #{$size};}
+}

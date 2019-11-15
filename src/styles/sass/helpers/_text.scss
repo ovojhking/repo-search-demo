@@ -1,0 +1,29 @@
+.font-size-sm{
+  font-size: $font-size-sm;
+}
+.font-size-slight-sm{
+  font-size: 0.8rem;
+}
+
+
+
+.font-size-md{
+    font-size: $font-size-base;
+}
+
+.font-size-lg{
+  font-size: $font-size-lg;
+}
+
+.font-size-xl{
+  font-size: $font-size-xl;
+}
+
+.letter-spacing-md{
+  letter-spacing: 1px;
+}
+
+
+@each $color, $value in $grays {
+  @include text-emphasis-variant(".text-gray-#{$color}", $value);
+}
