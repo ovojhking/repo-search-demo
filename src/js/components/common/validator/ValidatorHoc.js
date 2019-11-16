@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 
 function ValidatorHoc(WrappedComponent, validatorRuleList) {
 	return class extends React.Component {
+		static validate(inputValue) {
+			if (inputValue === '') {
+				return true;
+			}
+			return validatorRuleList.some(
+				(rule) => inputValue.match(rule),
+			);
+		}
+
 		constructor(props) {
 			super(props);
 			this.state = {
@@ -12,20 +21,12 @@ function ValidatorHoc(WrappedComponent, validatorRuleList) {
 		}
 
 		hijackGetSearchText(inputValue) {
-			const isValidated = this.validate(inputValue);
+			const { getSearchText } = this.props;
+			const isValidated = this.constructor.validate(inputValue);
 			if (isValidated) {
-				this.props.getSearchText(inputValue);
+				getSearchText(inputValue);
 			}
 			this.setState({ isValidated });
-		}
-
-		validate(inputValue) {
-			if (inputValue === '') {
-				return true;
-			}
-			return validatorRuleList.some(
-				rule => inputValue.match(rule)
-			);
 		}
 
 		renderErrorMsg() {
@@ -48,5 +49,6 @@ function ValidatorHoc(WrappedComponent, validatorRuleList) {
 		}
 	};
 }
+
 
 export default ValidatorHoc;
