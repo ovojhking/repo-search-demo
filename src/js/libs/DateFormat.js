@@ -1,6 +1,6 @@
 const DateFormat = class DateFormat {
 	constructor() {
-		this.dateFormated;
+		this.dateFormated = null;
 		this.monthsInEnglish = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	}
 
