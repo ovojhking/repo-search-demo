@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import searchTextAction from '../../../store/searchText/searchTextAction';
+import PropTypes from 'prop-types';
 
+import searchTextAction from '../../../store/searchText/searchTextAction';
 import ApiGithub from '../../../apis/ApiGithub';
 import DateFormat from '../../../libs/DateFormat';
 import InfiniteScroll from '../infiniteScroll/InfiniteScroll';
 import Loading from '../loading/Loading';
 
 class RepoSearchContent extends Component {
+	static loader() {
+		return (
+			<div className="d-flex justify-content-center p-2">
+				<Loading />
+			</div>
+		);
+	}
+
+	static formatDate(date) {
+		const dateFormat = new DateFormat();
+		dateFormat.init(date);
+		return dateFormat.getBritishFormat();
+	}
+
 	constructor() {
 		super();
 		this.state = {
@@ -24,8 +39,9 @@ class RepoSearchContent extends Component {
 		this.infiniteScrollItem = this.infiniteScrollItem.bind(this);
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const { searchTextRepo } = this.props.stores;
+	componentDidUpdate(prevProps) {
+		const { stores } = this.props;
+		const { searchTextRepo } = stores;
 		const preSearchTextRepo = prevProps.stores.searchTextRepo;
 
 		if (searchTextRepo !== preSearchTextRepo) {
@@ -34,9 +50,11 @@ class RepoSearchContent extends Component {
 	}
 
 	onSearchTextChange() {
-		const { searchTextRepo } = this.props.stores;
+		const { stores } = this.props;
+		const { isWait } = this.state;
+		const { searchTextRepo } = stores;
 		this.resetInfiniteScrollList();
-		if (searchTextRepo !== '' && !this.state.isWait) {
+		if (searchTextRepo !== '' && !isWait) {
 			this.setState({ isWait: true }, () => {
 				this.fetchDataFromGitHub();
 			});
@@ -55,14 +73,6 @@ class RepoSearchContent extends Component {
 		});
 	}
 
-	loader() {
-		return (
-			<div className="d-flex justify-content-center p-2">
-				<Loading />
-			</div>
-		);
-	}
-
 	updateResourceList() {
 		this.fetchDataNextPage();
 	}
@@ -76,17 +86,20 @@ class RepoSearchContent extends Component {
 	}
 
 	fetchDataFromGitHub() {
-		const { searchTextRepo } = this.props.stores;
+		const { stores } = this.props;
+		const { searchTextRepo } = stores;
 		const isWait = false;
 		setTimeout(() => {
-			if (searchTextRepo !== this.props.stores.searchTextRepo) {
+			const { stores: setTimeoutStore } = this.props;
+			if (searchTextRepo !== setTimeoutStore.searchTextRepo) {
 				this.fetchDataFromGitHub();
 			} else if (searchTextRepo !== '') {
 				const { page } = this.state;
 				const apiGithub = new ApiGithub();
 				apiGithub.getRepoSearch(searchTextRepo, page).then((res) => {
 					const resourceList = res.data.items;
-					if (searchTextRepo !== this.props.stores.searchTextRepo) {
+					const { stores: getApiStore } = this.props;
+					if (searchTextRepo !== getApiStore.searchTextRepo) {
 						this.fetchDataFromGitHub();
 					} else {
 						this.setState({ resourceList, isWait });
@@ -121,7 +134,7 @@ class RepoSearchContent extends Component {
 							{item.license ? item.license.name : null}
 						</p>
 						<p className="mr-3 mb-0 mt-2">
-							{this.formatDate(item.updated_at)}
+							{this.constructor.formatDate(item.updated_at)}
 						</p>
 					</div>
 				</div>
@@ -146,16 +159,10 @@ class RepoSearchContent extends Component {
 		);
 	}
 
-	formatDate(date) {
-		const dateFormat = new DateFormat();
-		dateFormat.init(date);
-		return dateFormat.getBritishFormat();
-	}
-
 	renderLoader() {
 		const { isWait } = this.state;
 		if (isWait) {
-			return this.loader();
+			return this.constructor.loader();
 		}
 		return '';
 	}
@@ -168,7 +175,7 @@ class RepoSearchContent extends Component {
 				<InfiniteScroll
 					resetFlag={resetFlag}
 					setResetFlag={this.setResetFlag}
-					loader={this.loader}
+					loader={this.constructor.loader}
 					loadingDelay={2000}
 					renderItem={this.infiniteScrollItem}
 					resourceList={resourceList}
@@ -178,6 +185,10 @@ class RepoSearchContent extends Component {
 		);
 	}
 }
+
+RepoSearchContent.propTypes = {
+	stores: PropTypes.instanceOf(Object).isRequired,
+};
 
 const mapStateToProps = (state) => {
 	const { searchTexts } = state;
