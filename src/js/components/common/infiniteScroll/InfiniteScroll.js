@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { isScrollToBottom } from '../../../libs/scroll';
 
@@ -17,23 +18,26 @@ class InfiniteScroll extends Component {
 		window.addEventListener('scroll', this.handleScroll.bind(this));
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const { resetFlag, resourceList } = this.props;
-		if (resetFlag) {
-			this.reset();
-		} else if (prevProps.resourceList.length === 0 && resourceList.length > 0) {
-			const stateResourceList = this.state.resourceList;
-			this.setState({ resourceList: [...stateResourceList, ...resourceList] }, () => {
-				this.pushRenderList();
-			});
-		} else if (!_.isEqual(resourceList, prevProps.resourceList)) {
-			const stateResourceList = this.state.resourceList;
-			this.setState({ resourceList: [...stateResourceList, ...resourceList] });
-		}
+	componentDidUpdate(prevProps) {
+		this.onPropsChange(prevProps);
 	}
 
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this.handleScroll.bind(this));
+	}
+
+	onPropsChange(prevProps) {
+		const { resetFlag, resourceList } = this.props;
+		const { resourceList: stateResourceList } = this.state;
+		if (resetFlag) {
+			this.reset();
+		} else if (prevProps.resourceList.length === 0 && resourceList.length > 0) {
+			this.setState({ resourceList: [...stateResourceList, ...resourceList] }, () => {
+				this.pushRenderList();
+			});
+		} else if (!_.isEqual(resourceList, prevProps.resourceList)) {
+			this.setState({ resourceList: [...stateResourceList, ...resourceList] });
+		}
 	}
 
 	setDelay(time, callBack) {
@@ -90,10 +94,12 @@ class InfiniteScroll extends Component {
 	}
 
 	handleScroll() {
-		if (isScrollToBottom() && !this.state.isWait) {
+		const { isWait } = this.state;
+		if (isScrollToBottom() && !isWait) {
 			const { resourceList } = this.props;
 			if (resourceList.length !== 0) {
-				const delayTime = this.props.loadingDelay ? this.props.loadingDelay : 0;
+				const { loadingDelay } = this.props;
+				const delayTime = loadingDelay || 0;
 				this.setDelay(delayTime, this.pushRenderList.bind(this));
 			}
 		}
@@ -120,5 +126,15 @@ class InfiniteScroll extends Component {
 		);
 	}
 }
+
+InfiniteScroll.propTypes = {
+	resetFlag: PropTypes.bool.isRequired,
+	resourceList: PropTypes.instanceOf(Array).isRequired,
+	loader: PropTypes.instanceOf(Object).isRequired,
+	updateResourceList: PropTypes.func.isRequired,
+	renderItem: PropTypes.func.isRequired,
+	setResetFlag: PropTypes.func.isRequired,
+	loadingDelay: PropTypes.number.isRequired,
+};
 
 export default InfiniteScroll;
