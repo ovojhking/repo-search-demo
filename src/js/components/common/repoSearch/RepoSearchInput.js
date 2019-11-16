@@ -7,6 +7,8 @@ import ValidatorHoc from '../validator/ValidatorHoc';
 import ImmediateSubmitSearchInput from '../searchInput/ImmediateSubmitSearchInput';
 import specialCharacters from '../../../configs/validatorRules';
 
+import { scrollToTop } from '../../../libs/scroll';
+
 const InputValidator = ValidatorHoc(ImmediateSubmitSearchInput, [specialCharacters]);
 
 class RepoSearchInput extends Component {
@@ -16,6 +18,7 @@ class RepoSearchInput extends Component {
 	}
 
 	getSearchText(searchText) {
+		scrollToTop();
 		const { searchTextAction } = this.props;
 		searchTextAction.setRepo(searchText);
 	}

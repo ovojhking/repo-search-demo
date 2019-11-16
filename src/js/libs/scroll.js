@@ -38,10 +38,19 @@ function getWindowHeight() {
 }
 
 function isScrollToBottom() {
-	if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+	// 因為手機版滾動時的偵測不太靈敏，所以把設定值範圍拉大
+	// if (getScrollTop() + getWindowHeight() === getScrollHeight()) {
+	if (getScrollTop() + getWindowHeight() >= getScrollHeight() - 50) {
 		return true;
 	}
 	return false;
+}
+
+function scrollToTop() {
+	window.scrollTo({
+		top: 0,
+		behavior: 'smooth',
+	});
 }
 
 export {
@@ -49,4 +58,5 @@ export {
 	getScrollHeight,
 	getWindowHeight,
 	isScrollToBottom,
+	scrollToTop,
 };
