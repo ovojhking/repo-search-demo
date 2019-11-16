@@ -1,15 +1,13 @@
 import axios from 'axios';
 
 const ApiBase = class ApiBase {
-	constructor() {
-		this.domainName = '';
+	static defaultGet(url) {
+		return axios.get(url).then((res) => res)
+			.catch((err) => Promise.reject(err));
 	}
 
-	defaultGet(url) {
-		return axios.get(url).then((res) => res)
-			.catch((err) => {
-				return Promise.reject(err);
-			});
+	constructor() {
+		this.domainName = '';
 	}
 };
 

@@ -8,7 +8,7 @@ const ApiGithub = class ApiGithub extends ApiBase {
 
 	getRepoSearch(q = '', page = 0) {
 		const url = `${this.domainName}/search/repositories?q=${q}&page=${page}`;
-		return this.defaultGet(url);
+		return this.constructor.defaultGet(url);
 	}
 };
 
