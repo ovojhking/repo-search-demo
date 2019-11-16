@@ -28,5 +28,19 @@
         "no-tabs": 0,
         "react/jsx-indent": [2, "tab"],
         "react/jsx-indent-props": [2, "tab"]
-    }
+    },
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["Apis", "./src/js/apis"],
+                    ["Components", "./src/js/components"],
+                    ["Configs", "./src/js/configs"],
+                    ["Libs", "./src/js/libs"],
+                    ["Store", "./src/js/store"],
+                    ["Assets", "./src/js/assets"]
+                ]
+            }
+        }
+    },
 }

@@ -51,4 +51,14 @@ module.exports = {
 			template: './src/index.html',
 		}),
 	],
+	resolve: {
+		alias: {
+			Apis: path.resolve(__dirname, 'src/js/apis'),
+			Components: path.resolve(__dirname, 'src/js/components'),
+			Configs: path.resolve(__dirname, 'src/js/configs'),
+			Libs: path.resolve(__dirname, 'src/js/libs'),
+			Store: path.resolve(__dirname, 'src/js/store'),
+			Assets: path.resolve(__dirname, 'src/assets'),
+		},
+	},
 };
