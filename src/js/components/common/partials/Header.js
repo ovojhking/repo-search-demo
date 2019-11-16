@@ -8,13 +8,20 @@ const Header = () => (
 			<div className="d-none d-sm-block col-sm-2 col-lg-1 h-70">
 				<img className="logo h-100" src={Logo} alt="logo" />
 			</div>
-			<div className="col-8 col-sm-8 col-lg-9">
+			<div className="col-8 col-sm-8 col-lg-7">
 				<RepoSearchInput />
 			</div>
-			<a className="col-4 col-sm-2 col-lg-2 text-white" href="https://www.cakeresume.com/s--7hIWbrdfMy9nVV0UQ_I9cA--/jimmy-eab4dd">
-				<i className="fa-lg fas fa-id-card" />
-				<span className="ml-2">履歷</span>
-			</a>
+			<div className="col-4 col-sm-2 col-lg-4 d-flex justify-content-between align-items-center">
+				<a className="col-6 text-white d-flex align-items-center no-underline" href="https://gitlab.com/jhtokd/repo-search-demo/">
+					<i className="fa-lg fab fa-gitlab" />
+					<span className="ml-2 d-none d-lg-block">程式碼</span>
+				</a>
+
+				<a className="col-6 text-white d-flex align-items-center no-underline" href="https://www.cakeresume.com/s--7hIWbrdfMy9nVV0UQ_I9cA--/jimmy-eab4dd">
+					<i className="fa-lg fas fa-id-card" />
+					<span className="ml-2 d-none d-lg-block">履歷</span>
+				</a>
+			</div>
 		</div>
 	</div>
 );
