@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ImmediateSubmitSearchInput extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			searchText: props.defaultValue ? props.defaultValue : '',
+			searchText: props.defaultValue,
 		};
 		this.onSearchTextChange = this.onSearchTextChange.bind(this);
 	}
 
 	onSearchTextChange(event) {
+		const { getSearchText } = this.props;
 		const searchText = event.target.value;
 		this.setState({ searchText });
-		this.props.getSearchText(searchText);
+		getSearchText(searchText);
 	}
 
 	render() {
@@ -25,5 +27,14 @@ class ImmediateSubmitSearchInput extends Component {
 		);
 	}
 }
+
+ImmediateSubmitSearchInput.defaultProps = {
+	defaultValue: '',
+};
+
+ImmediateSubmitSearchInput.propTypes = {
+	defaultValue: PropTypes.string,
+	getSearchText: PropTypes.func.isRequired,
+};
 
 export default ImmediateSubmitSearchInput;
