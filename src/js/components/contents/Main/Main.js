@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../common/partials/Header';
-import RepoSearchContent from '../../common/repoSearch/RepoSearchContent';
+import Header from 'Components/common/partials/Header';
+import RepoSearchContent from 'Components/common/repoSearch/RepoSearchContent';
 
 const Main = () => (
 	<div>

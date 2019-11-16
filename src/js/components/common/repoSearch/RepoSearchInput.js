@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import searchTextAction from '../../../store/searchText/searchTextAction';
-import ValidatorHoc from '../validator/ValidatorHoc';
-import ImmediateSubmitSearchInput from '../searchInput/ImmediateSubmitSearchInput';
-import specialCharacters from '../../../configs/validatorRules';
-import { scrollToTop } from '../../../libs/scroll';
+import searchTextAction from 'Store/searchText/searchTextAction';
+import ValidatorHoc from 'Components/common/validator/ValidatorHoc';
+import ImmediateSubmitSearchInput from 'Components/common/searchInput/ImmediateSubmitSearchInput';
+import specialCharacters from 'Configs/validatorRules';
+import { scrollToTop } from 'Libs/scroll';
 
 const InputValidator = ValidatorHoc(ImmediateSubmitSearchInput, [specialCharacters]);
 

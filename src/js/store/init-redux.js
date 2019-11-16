@@ -5,7 +5,7 @@ import {
 	applyMiddleware,
 } from 'redux';
 import thunk from 'redux-thunk';
-import searchTexts from './searchText/searchTextReducer';
+import searchTexts from 'Store/searchText/searchTextReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({

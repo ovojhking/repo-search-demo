@@ -1,6 +1,6 @@
 import React from 'react';
-import RepoSearchInput from '../repoSearch/RepoSearchInput';
-import Logo from '../../../../assets/images/logo.png';
+import RepoSearchInput from 'Components/common/repoSearch/RepoSearchInput';
+import Logo from 'Assets/images/logo.png';
 
 const Header = () => (
 	<div className="header d-flex justify-content-center align-items-center">

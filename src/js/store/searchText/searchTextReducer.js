@@ -1,6 +1,6 @@
 import {
 	SET_REPO,
-} from './searchTextAction';
+} from 'Store/searchText/searchTextAction';
 
 export default function searchTexts(state = {}, action) {
 	switch (action.type) {

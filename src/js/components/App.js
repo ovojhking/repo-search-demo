@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../../styles/sass/app.scss';
 import { Provider } from 'react-redux';
-import store from '../store/init-redux';
-import Main from './contents/Main/Main';
+import store from 'Store/init-redux';
+import Main from 'Components/contents/Main/Main';
 
 
 const App = () =>

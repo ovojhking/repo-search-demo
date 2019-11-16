@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { isScrollToBottom } from '../../../libs/scroll';
+import { isScrollToBottom } from 'Libs/scroll';
 
 class InfiniteScroll extends Component {
 	constructor() {

@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import searchTextAction from '../../../store/searchText/searchTextAction';
-import ApiGithub from '../../../apis/ApiGithub';
-import DateFormat from '../../../libs/DateFormat';
-import InfiniteScroll from '../infiniteScroll/InfiniteScroll';
-import Loading from '../loading/Loading';
+import searchTextAction from 'Store/searchText/searchTextAction';
+import ApiGithub from 'Apis/ApiGithub';
+import DateFormat from 'Libs/DateFormat';
+import InfiniteScroll from 'Components/common/infiniteScroll/InfiniteScroll';
+import Loading from 'Components/common//loading/Loading';
 
 class RepoSearchContent extends Component {
 	static loader() {
