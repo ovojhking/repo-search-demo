@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import searchTextAction from '../../../store/searchText/searchTextAction';
+import PropTypes from 'prop-types';
 
+import searchTextAction from '../../../store/searchText/searchTextAction';
 import ValidatorHoc from '../validator/ValidatorHoc';
 import ImmediateSubmitSearchInput from '../searchInput/ImmediateSubmitSearchInput';
 import specialCharacters from '../../../configs/validatorRules';
-
 import { scrollToTop } from '../../../libs/scroll';
 
 const InputValidator = ValidatorHoc(ImmediateSubmitSearchInput, [specialCharacters]);
@@ -19,8 +19,8 @@ class RepoSearchInput extends Component {
 
 	getSearchText(searchText) {
 		scrollToTop();
-		const { searchTextAction } = this.props;
-		searchTextAction.setRepo(searchText);
+		const { searchTextAction: action } = this.props;
+		action.setRepo(searchText);
 	}
 
 	render() {
@@ -32,6 +32,10 @@ class RepoSearchInput extends Component {
 	}
 }
 
+RepoSearchInput.propTypes = {
+	searchTextAction: PropTypes.instanceOf(Object).isRequired,
+};
+
 const mapStateToProps = (state) => {
 	const { searchTexts } = state;
 	return {
@@ -41,10 +45,8 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		searchTextAction: bindActionCreators(searchTextAction, dispatch),
-	};
-};
+const mapDispatchToProps = (dispatch) => ({
+	searchTextAction: bindActionCreators(searchTextAction, dispatch),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(RepoSearchInput);
