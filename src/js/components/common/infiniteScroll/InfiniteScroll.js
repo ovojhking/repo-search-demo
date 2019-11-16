@@ -127,14 +127,21 @@ class InfiniteScroll extends Component {
 	}
 }
 
+InfiniteScroll.defaultProps = {
+	resetFlag: false,
+	loader: '',
+	setResetFlag: ()=>{},
+	loadingDelay: 100
+};
+
 InfiniteScroll.propTypes = {
-	resetFlag: PropTypes.bool.isRequired,
 	resourceList: PropTypes.instanceOf(Array).isRequired,
-	loader: PropTypes.instanceOf(Object).isRequired,
-	updateResourceList: PropTypes.func.isRequired,
 	renderItem: PropTypes.func.isRequired,
-	setResetFlag: PropTypes.func.isRequired,
-	loadingDelay: PropTypes.number.isRequired,
+	resetFlag: PropTypes.bool,
+	loader: PropTypes.instanceOf(Object),
+	updateResourceList: PropTypes.func.isRequired,
+	setResetFlag: PropTypes.func,
+	loadingDelay: PropTypes.number,
 };
 
 export default InfiniteScroll;
