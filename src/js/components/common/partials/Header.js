@@ -12,8 +12,8 @@ const Header = () => (
 				<RepoSearchInput />
 			</div>
 			<div className="col-4 col-sm-2 col-lg-4 d-flex justify-content-between align-items-center">
-				<a className="col-6 text-white d-flex align-items-center no-underline" href="https://gitlab.com/jhtokd/repo-search-demo/">
-					<i className="fa-lg fab fa-gitlab" />
+				<a className="col-6 text-white d-flex align-items-center no-underline" href="https://github.com/ovojhking/repo-search-demo">
+					<i className="fa-lg fab fa-github" />
 					<span className="ml-2 d-none d-lg-block">程式碼</span>
 				</a>
 
